@@ -1,32 +1,29 @@
-import React, {Component} from 'react'
-import ArticleList from './ArticleList/index'
-import articles from '../fixtures'
-import 'bootstrap/dist/css/bootstrap.css'
+import React from 'react'
+import ArticleList from './ArticleList'
+//import articles from '../fixtures'
+import axios from 'axios';
 
-class App extends Component {
+
+class App extends React.Component {
 	state = {
-		reverted: false
+    	posts: [],
+  	}
+	componentDidMount() {
+	    axios.get(`https://demo1266316.mockable.io/azelsky_prac`)
+	      .then(res => {
+	        let posts = res.data.products;
+	        this.setState({ posts });
+	    });
 	}
-	
-	render(){
 
-		return (
-			<div className="container">
-				<div className="jumbotron">
-					<h1 className="display-3">
-						App name
-						<button className="btn" onClick = {this.revert}>Revert</button>
-					</h1>
-				</div>
-				<ArticleList articles = {this.state.reverted ? articles.reverse() : articles} />
-				
+	render(){
+		return(
+			<div>
+				<ArticleList articles={this.state.posts}/>
 			</div>
 		)
+		
 	}
-
-	revert = () => this.setState({
-		reverted: !this.state.reverted
-	})
 }
 
 export default App

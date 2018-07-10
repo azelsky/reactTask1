@@ -1,64 +1,30 @@
-import React, {Component} from 'react'
+import React from 'react'
+import './style.css'
 
-class Article extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      isOpen: props.defaultOpen
-    }
-  }
-
-  componentWillMount(){
-    console.log('---', 'mounting');
-  }
-
-  componentWillReceiveProps(nextProps){
-    console.log('---', 'will receive props');
-    if(nextProps.defaultOpen !== this.props.defaultOpen) this.setState({
-      isOpen: nextProps.defaultOpen
-    })
-  }
-
-  componentWillUpdate(){
-    console.log('---', 'will update');
-  }
-
-
-  /*state = {
-    isOpen: true
-  }*/
+class Article extends React.Component {
 
   render() {
-    const {article} = this.props;
-    const body = this.state.isOpen && <section className="card-text">{article.text}</section>;
-    console.log(this.state.isOpen);
+    const {link, img, bsr_category, name, price} = this.props.article;
     return (
-      <div className='card mx-auto' style = {{ width: '50%' }}>
-        <div className="card-header">
-          <h2>
-            {article.title}
-            <button onClick={this.handleClick} className="btn btn-primary btn-lg float-right">
-              {this.state.isOpen ? 'close' : 'open'}
-            </button>
-          </h2> 
-        </div>
-        <div className="card-body">
-          <h6 className="card-subtitle text-muted">
-            creation date: {(new Date(article.date)).toDateString()}
-          </h6>
-          {body}
-        </div>
+      <div className="container">
+          <div className="col-10 offset-1 post">
+            <div className="row">
+              <h4>{name}</h4>   
+              <div className="col-6">
+                <img width="100%" src={img} alt=""/>
+              </div>
+              <div className="col-6">
+                <h4>Price: {price}</h4>
+                <p>Category: {bsr_category}</p>
+                <a href={link}>Buy</a>
+              </div>
+            </div>
+          </div>
       </div>
     )
   }
-
-  handleClick = () => {
-    console.log('click');
-    this.setState({
-      isOpen: !this.state.isOpen,
-    })
-  }
 }
+  
+
 
 export default Article
