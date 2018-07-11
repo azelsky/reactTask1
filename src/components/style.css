@@ -5,3 +5,8 @@
 li{
 	list-style: none;
 }
+
+.category{
+	text-align: left;
+	cursor: pointer;
+}

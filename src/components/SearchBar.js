@@ -5,10 +5,8 @@ export default ({term, data, update, }) => {
         const value = e.target.value.toLowerCase();
 
         const filter = data.filter( post => {
-            //console.log(post.name)
             return post.name.toLowerCase().includes(value);
         });
-        
         update({
             posts: filter,
             term: value

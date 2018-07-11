@@ -7,9 +7,11 @@ class Article extends React.Component {
     const {link, img, bsr_category, name, price} = this.props.article;
     return (
       <div className="container">
-          <div className="col-10 offset-1 post">
+          <div className="post">
             <div className="row">
+            <div className="col-12">
               <h4>{name}</h4>   
+            </div>
               <div className="col-6">
                 <img width="100%" src={img} alt=""/>
               </div>
