@@ -1,22 +1,19 @@
 import React, {Component} from 'react';
 import { Panel, ListGroup, ListGroupItem } from 'react-bootstrap';
 import './style.css';
+import { NavLink } from "react-router-dom";
 
 export default class Category extends Component{
+
     render(){
         const {update, data} = this.props;
-
-        if(!data) return 'loading...';
-
-        const categorySearch = function(e){
+        
+        if(!data) return null;
+        const categorySearch = (e) => {
             const value = e.nativeEvent.path[0].innerText;
             let filter = [];
             if(e.nativeEvent.path[0].innerText !== 'All Category'){
-                filter = data.filter(
-                    post => {
-                        return post.bsr_category.includes(value);
-                    }
-                );
+                filter = data.filter(post =>  post.bsr_category.includes(value));
             } else {
                 filter = data;
             }
@@ -27,28 +24,57 @@ export default class Category extends Component{
             })
         }
 
+
         let category = [];
         const categoryElements = data.map(
             (article) => {
                 if(category.indexOf(article.bsr_category) === -1){
+                    const categoryLink = article.bsr_category.replace(/ /g, "-");
                     category[category.length] = article.bsr_category;
+                    let currentClass = '';
+                    if(article.bsr_category.replace(/ /g, "-") === window.location.pathname.slice(1)){
+                        currentClass = 'current';
+                        
+                    }
+                    /*currantClass='';
+                    if (currentCategory === categoryFromUrl) {
+                        currantClass = 'active';
+                    }*/
                     return (
-                        <ListGroupItem onClick={categorySearch} className='category' key={article.asin}>{article.bsr_category}</ListGroupItem>
+                    <NavLink activeStyle={{color: 'red'}} to={`/${categoryLink}`} key={article.asin}>
+                      <ListGroupItem onClick={categorySearch} bsClass={"category list-group-item " + currentClass}   >
+                          
+                            {article.bsr_category}
+                             
+                      </ListGroupItem>
+                      </NavLink>
+                       
                     )
                 } else {
                     return false;
                 }
             }
         );
-       
+        let currentClass = "";
+        if(window.location.pathname === "/"){
+            currentClass = "current"
+        }
         return(
-            <Panel>
+           
+          <Panel>
                 <Panel.Heading>Search by Category</Panel.Heading>
-                <ListGroup>
-                    <ListGroupItem className="category" onClick={categorySearch}>All Category</ListGroupItem>
+                <ListGroup>                   
+                    <NavLink to='/'>
+                        <ListGroupItem bsClass={"category list-group-item " + currentClass} onClick={categorySearch}>
+                            All Category
+                        </ListGroupItem> 
+                    </NavLink> 
                     {categoryElements}
                 </ListGroup>
             </Panel>
+           
+          
         )
     }
 }
+

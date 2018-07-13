@@ -16,7 +16,7 @@ class Article extends React.Component {
                 <img width="100%" src={img} alt=""/>
               </div>
               <div className="col-6">
-                <h4>Price: {price}</h4>
+                <h4>Price: {`${price}$`}</h4>
                 <p>Category: {bsr_category}</p>
                 <a href={link}>Buy</a>
               </div>

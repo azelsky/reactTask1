@@ -1,3 +1,8 @@
+a{
+	outline:none!important
+}
+
+
 .post{
 	border: 1px solid #000;
 }
@@ -9,4 +14,16 @@ li{
 .category{
 	text-align: left;
 	cursor: pointer;
+	width: 100%;
+}
+
+
+
+
+
+a{
+	color: #000!important;
+}
+.current{
+	font-weight: bold!important;
 }

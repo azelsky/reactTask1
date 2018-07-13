@@ -3,7 +3,7 @@ import ArticleList from './ArticleList';
 import Category from './Category';
 import axios from 'axios';
 import SearchBar from './SearchBar';
-
+import { BrowserRouter as Router, } from "react-router-dom";
 
 
 class App extends React.Component {
@@ -23,6 +23,8 @@ class App extends React.Component {
 		this.setState(config);
 	}
 
+
+
 	loadData(){
 	    axios.get(`https://demo1266316.mockable.io/azelsky_prac`)
 	      .then(res => {
@@ -35,28 +37,29 @@ class App extends React.Component {
 	}
 
 	render(){
+ 
 		return(
-			<div className="container">
-				<SearchBar
-					term = {this.state.term}
-					data = {this.state.search}
-					update = {this.updateData.bind(this)}
-					
-				/>
-				<div className="row">
-					<div className="col-4">
-						<Category 
-							data = {this.initialData}
-							update = {this.updateData.bind(this)}
-
-						/>
-					</div>
-					<div className="col-8">
-						<ArticleList articles={this.state.posts}/>
-					</div>
-					
-				</div>
-			</div>
+      <Router>
+        <div className="container">
+          <SearchBar
+            term = {this.state.term}
+            data = {this.state.search}
+            update = {this.updateData.bind(this)}
+            
+          />
+          <div className="row">
+            <div className="col-4">
+							<Category 
+                data = {this.initialData}
+								update = {this.updateData.bind(this)}
+              />
+            </div>
+            <div className="col-8">
+              <ArticleList articles={this.state.posts}/>
+            </div>
+          </div>
+        </div>
+      </Router>
 		)
 		
 	}
