@@ -5,7 +5,6 @@ import axios from 'axios';
 import SearchBar from './SearchBar';
 import { BrowserRouter as Router, } from "react-router-dom";
 
-
 class App extends React.Component {
 	constructor(props){
 		super(props);
@@ -38,6 +37,7 @@ class App extends React.Component {
 
 	render(){
  
+		console.log(this.props.testStore)
 		return(
       <Router>
         <div className="container">
