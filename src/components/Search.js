@@ -1,14 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default ({term, data, update, }) => {
+const Search = ({term, data, update, }) => {
     const dataSearch = e => {
         const value = e.target.value.toLowerCase();
 
         const filter = data.filter( post => {
             return post.name.toLowerCase().includes(value);
         });
+
         update({
-            posts: filter,
+            products: filter,
             term: value
         })
     };
@@ -25,3 +27,11 @@ export default ({term, data, update, }) => {
         </div>
     )
 }
+
+Search.propTypes = {
+    term: PropTypes.string,
+    data: PropTypes.array.isRequired,
+    update: PropTypes.func.isRequired
+}
+
+export default Search
