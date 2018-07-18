@@ -26,10 +26,10 @@ class App extends React.Component {
 	    axios.get(`https://demo1266316.mockable.io/azelsky_prac`)
 	      .then(res => {
                 this.setState({ 
-                initialData: res.data.products,
-				products: res.data.products,
-				search: res.data.products
-			});
+                    initialData: res.data.products,
+                    products: res.data.products,
+                    search: res.data.products
+                });
 	    });	
 	}
 
